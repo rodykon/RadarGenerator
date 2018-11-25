@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Radar Background Generator</title>
+        <link rel="stylesheet" type="text/css" href="design.css">
+    </head>
+    
+    <body>
+        <h1>Radar Chart Background Generator</h1>
+        
+        <div id="input">
+            <h2>Measure Names:</h2>
+            <ul id="list"></ul>
+            <input type="text" id="text_box" placeholder="Add measures..." />
+            <input type="button" value = "add" id="add"/>
+            <input type="button" value="Generate Background Image" id="generate"/>
+        </div>
+        
+        <div id="canvas_area">
+            <canvas id="canvas" width="800" height = "800" style="border:1px solid #000000;"></canvas>
+            <input type="button" value="Download as PNG" id="export"/>
+        </div>
+        
+        
+        <script src="javascript.js"></script>
+    </body>
+</html>

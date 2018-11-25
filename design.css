@@ -1,0 +1,57 @@
+h1, h2, li, input {
+    font-family: 'Hammersmith One', sans-serif;
+}
+
+#input {
+    position: absolute;
+    display: inline-block;
+    border: 5px solid red;
+    background-color: #f1f1f1;
+    padding-bottom: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+#input h2 {
+    position: relative;
+    font-size: 20px
+}
+
+#input ul {
+    position:relative;
+    list-style-type: none;
+}
+
+input[type="button"] {
+    transition-duration: 0.3s;
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+    border-radius: 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: red;
+    color: white;
+}
+
+#canvas_area {
+    position: fixed;
+    left: 275px
+}
+
+#generate {
+    position:inherit;
+}
+
+#export {
+    position: inherit;
+    font-size: 50px;
+    border: 2px solid red;
+}
