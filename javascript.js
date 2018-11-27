@@ -2,7 +2,6 @@ var measures = [];
 
 // Handle adding to list.
 document.getElementById("add").onclick = function () {
-    "use strict";
     // Get the text box value.
     var value = document.getElementById("text_box").value;
     // Add value to measures array.
@@ -30,14 +29,35 @@ document.getElementById("text_box").onkeyup = function (event) {
 
 // RADAR PARAMS
 var referenceLines = 5;
-var chartColor = "#A9A9A9";
+var lineColor = "#A9A9A9";
+var lineWidth = 2;
 var textColor = "#000000";
+var fontSize = 20;
+var textDistance = 50;
+var offset = true;
 
+function updateParams() {
+    referenceLines = document.getElementById("reference_lines").value;
+    lineColor = document.getElementById("line_color").value;
+    lineWidth = document.getElementById("line_width").value;
+    textColor = document.getElementById("text_color").value;
+    fontSize = document.getElementById("font_size").value;
+    textDistance = document.getElementById("text_distance").value;
+    offset = document.getElementById("offset").checked;
+}
 // Draw radar chart background on canvas.
 document.getElementById("generate").onclick = function () {
-    "use strict";
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
+    
+    updateParams();
+    
+    ctx.lineWidth = lineWidth;
+    ctx.strokeStyle = lineColor;
+    
+    ctx.fillStyle = textColor;
+    ctx.font = fontSize + "px Arial";
+    ctx.textAlign = "center";
     
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
@@ -46,35 +66,29 @@ document.getElementById("generate").onclick = function () {
         alert("Number of measures must be greater than 1!");
     } else {
         var delta = 2*Math.PI / measures.length; // The angle difference between adjacent lines.
-        var angleOffset = delta / 2;
+        var angleOffset = offset ? delta / 2 : 0;
         var lineLength = (canvas.getAttribute("width") / 8) * 3;
         var currentAngle = 0;
         
-        ctx.fillStyle = "gray";
         for (var i = 0; i < measures.length; i++) { // Draw main lines and text.
             var x = lineLength * Math.cos(angleOffset + currentAngle);
             var y = lineLength * Math.sin(angleOffset + currentAngle);
             
             // Draw line
-            ctx.strokeStyle = chartColor; // Set color to LightGray
             ctx.beginPath();
             ctx.moveTo(400, 400);
             ctx.lineTo(400 + x, 400 + y);
             ctx.stroke();
             
-            var x = (lineLength + 50) * Math.cos(angleOffset + currentAngle);
-            var y = (lineLength + 50) * Math.sin(angleOffset + currentAngle);
+            var x = (lineLength + Number(textDistance)) * Math.cos(angleOffset + currentAngle);
+            var y = (lineLength + Number(textDistance)) * Math.sin(angleOffset + currentAngle);
             
             // Draw text
-            ctx.fillStyle = textColor; // Set color to black
-            ctx.font = "20px Arial";
-            ctx.textAlign = "center";
             ctx.fillText(measures[i], 400 + x, 400 + y);
             
             currentAngle += delta;
         }
         
-        ctx.strokeStyle = chartColor; // Set color to LightGray
         // Draw inner lines.
         for (var i = 1; i <= referenceLines; i++) {
             var length = i*(lineLength / referenceLines);
@@ -103,4 +117,17 @@ document.getElementById("export").onclick = function () {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+};
+
+document.getElementById("show_advanced").onclick = function () {
+    button = document.getElementById("show_advanced");
+    if (button.className == "active") { // Hide menu.
+        button.className = "inactive";
+        document.getElementById("advanced_options").setAttribute("hidden", "");
+    } else { // Show menu.
+        button.className = "active";
+        document.getElementById("advanced_options").removeAttribute("hidden");
+        
+    }
+    
 };

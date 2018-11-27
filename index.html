@@ -16,6 +16,19 @@
             <input type="button" value="Generate Background Image" id="generate"/>
         </div>
         
+        <div id="advanced">
+            <input type="button" value="Advanced Options..." id="show_advanced" />
+            <form id="advanced_options" hidden>
+                Reference lines: <input type="number" value=5 id="reference_lines" />
+                Line Color: <input type="text" value="#A9A9A9" id="line_color" />
+                Line Width: <input type="number" value=2 id="line_width" />
+                Text Color: <input type="text" value="#000000" id="text_color" />
+                Font Size: <input type="number" value=20 id="font_size" />
+                Text Distance: <input type="number" value=50 id="text_distance" />
+                Offset by Half-Angle: <input type="checkbox" onclick="toggle" value="checked" id="offset" checked />
+            </form>
+        </div>
+        
         <div id="canvas_area">
             <canvas id="canvas" width="800" height = "800" style="border:1px solid #000000;"></canvas>
             <input type="button" value="Download as PNG" id="export"/>

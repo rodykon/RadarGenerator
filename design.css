@@ -2,14 +2,20 @@ h1, h2, li, input {
     font-family: 'Hammersmith One', sans-serif;
 }
 
-#input {
-    position: absolute;
+#input, #advanced {
+    margin: 2px;
+    width: 230px;
+    overflow: auto;
+    float: left;
     display: inline-block;
     border: 5px solid red;
     background-color: #f1f1f1;
-    padding-bottom: 100%;
     padding-right: 10px;
     padding-left: 10px;
+}
+
+#advanced {
+    clear: both;
 }
 
 #input h2 {
@@ -18,11 +24,11 @@ h1, h2, li, input {
 }
 
 #input ul {
-    position:relative;
     list-style-type: none;
 }
 
 input[type="button"] {
+    position: relative;
     transition-duration: 0.3s;
     background-color: white;
     color: red;
@@ -41,17 +47,22 @@ input[type="button"]:hover {
     color: white;
 }
 
-#canvas_area {
-    position: fixed;
-    left: 275px
-}
-
 #generate {
-    position:inherit;
+    float: bottom;
 }
 
 #export {
     position: inherit;
+    float: bottom;
     font-size: 50px;
     border: 2px solid red;
+}
+
+#canvas {
+    
+}
+
+input.active {
+    background-color: red;
+    color: white;
 }
