@@ -19,13 +19,13 @@
         <div id="advanced">
             <input type="button" value="Advanced Options..." id="show_advanced" />
             <form id="advanced_options" hidden>
-                Reference lines: <input type="number" value=5 id="reference_lines" />
-                Line Color: <input type="text" value="#A9A9A9" id="line_color" />
-                Line Width: <input type="number" value=2 id="line_width" />
-                Text Color: <input type="text" value="#000000" id="text_color" />
-                Font Size: <input type="number" value=20 id="font_size" />
-                Text Distance: <input type="number" value=50 id="text_distance" />
-                Offset by Half-Angle: <input type="checkbox" onclick="toggle" value="checked" id="offset" checked />
+                Reference lines: <input type="number" value=5 id="reference_lines" maxlength="3" size="3"/><br>
+                Line Color: <input type="text" value="#A9A9A9" id="line_color" maxlength="7" size="7"/><br>
+                Line Width: <input type="number" value=2 id="line_width"/><br>
+                Text Color: <input type="text" value="#000000" id="text_color" maxlength="7" size="7"/><br>
+                Font Size: <input type="number" value=20 id="font_size"/><br>
+                Text Distance: <input type="number" value=50 id="text_distance"/><br>
+                Offset by Half-Angle: <input type="checkbox" id="offset" checked />
             </form>
         </div>
         

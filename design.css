@@ -66,3 +66,7 @@ input.active {
     background-color: red;
     color: white;
 }
+
+input[type="number"] {
+    width: 45px;
+}
