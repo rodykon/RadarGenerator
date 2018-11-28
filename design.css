@@ -52,14 +52,12 @@ input[type="button"]:hover {
 }
 
 #export {
-    position: inherit;
-    float: bottom;
+    position: relative;
+    left: 262px;
     font-size: 50px;
     border: 2px solid red;
-}
-
-#canvas {
-    
+    width: 800px;
+    text-align: center;
 }
 
 input.active {
