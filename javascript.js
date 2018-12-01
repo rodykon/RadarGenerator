@@ -1,5 +1,16 @@
 var measures = [];
 
+function removeFromList(id) {
+    var item = document.getElementById(id);
+    measures.splice(Number(id), 1);
+    document.getElementById("list").removeChild(item);
+    
+    for (var i=Number(id)+1; i < measures.length+1; i++) {
+        document.getElementById(String(i)).getElementsByTagName("input").item(0).setAttribute("onclick", "removeFromList('" + String(i-1) + "')");
+        document.getElementById(String(i)).setAttribute("id", String(i-1));
+    }
+}
+
 // Handle adding to list.
 document.getElementById("add").onclick = function () {
     // Get the text box value.
@@ -7,18 +18,27 @@ document.getElementById("add").onclick = function () {
     // Add value to measures array.
     measures.push(value);
     // Add value to list.
-    var node = document.createElement("Li");
-    node.appendChild(document.createTextNode(value));
-    document.getElementById("list").appendChild(node);
+    var id = measures.length-1;
+    var textNode = document.createElement("Li");
+    textNode.appendChild(document.createTextNode(value));
+    textNode.setAttribute("id", id);
+    
+    // Add 'remove' button
+    var inputNode = document.createElement("input");
+    inputNode.setAttribute("type", "button")
+    inputNode.setAttribute("value", "remove");
+    inputNode.setAttribute("onclick", "removeFromList('" + id + "')");
+    textNode.appendChild(inputNode);
+    document.getElementById("list").appendChild(textNode);
     
     // Delete current value and focus
     document.getElementById("text_box").value = "";
     document.getElementById("text_box").focus();
 };
 
+
 // Make enter add items to list.
 document.getElementById("text_box").onkeyup = function (event) {
-    "use strict";
     
     event.preventDefault();
     
@@ -77,14 +97,14 @@ document.getElementById("generate").onclick = function () {
             // Draw line
             ctx.beginPath();
             ctx.moveTo(400, 400);
-            ctx.lineTo(400 + x, 400 + y);
+            ctx.lineTo(400 + x, 400 - y);
             ctx.stroke();
             
             var x = (lineLength + Number(textDistance)) * Math.cos(angleOffset + currentAngle);
             var y = (lineLength + Number(textDistance)) * Math.sin(angleOffset + currentAngle);
             
             // Draw text
-            ctx.fillText(measures[i], 400 + x, 400 + y);
+            ctx.fillText(measures[i], 400 + x, 400 - y);
             
             currentAngle += delta;
         }
@@ -94,10 +114,10 @@ document.getElementById("generate").onclick = function () {
             var length = i*(lineLength / referenceLines);
             var currentAngle = 0;
             ctx.beginPath();
-            ctx.moveTo(400 + length*Math.cos(angleOffset + currentAngle), 400 + length*Math.sin(angleOffset + currentAngle));
+            ctx.moveTo(400 + length*Math.cos(angleOffset + currentAngle), 400 - length*Math.sin(angleOffset + currentAngle));
             for (var j = 0; j < measures.length; j++) {
                 currentAngle+=delta;
-                ctx.lineTo(400 + length*Math.cos(angleOffset + currentAngle), 400 + length*Math.sin(angleOffset + currentAngle))
+                ctx.lineTo(400 + length*Math.cos(angleOffset + currentAngle), 400 - length*Math.sin(angleOffset + currentAngle))
             }
             ctx.stroke();
         }
